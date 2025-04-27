@@ -13,29 +13,38 @@ import { iif } from 'rxjs';
 })
 export class LoginComponent {
 
-  email: string = '';
-  password: string = '';
-  error: string = '';
+  email: string = ''
+  password: string = ''
+  error: string = ''
 
-  // constructor(private authService: AuthService, private router: Router){
+  constructor(private authService: AuthService, private router: Router){
 
-  // }
+  }
 
-
-  constructor(private authService: AuthService, private router: Router) {}
-
-  onLogin() {
+  onLogin(){
     this.authService.login(this.email, this.password).subscribe({
       next: (res) => {
-        if (res && res.token) {
-          this.authService.saveToken(res.token);
-          this.router.navigate(['/users']);
+        if(res){
+          this.authService.saveToken(res.token)
+          this.router.navigate(['/users'])
         }
-      },
-      error: (err) => {
-        console.error(err);
-        this.error = err.error?.error || 'Кіру қатесі';
       }
-    });
+    })
   }
+
+
+  // constructor(private authService: AuthService, private router: Router) {}
+  // onLogin() {
+  //   console.log('Login start:', this.email, this.password);
+  //   debugger;
+  //   this.authService.login(this.email, this.password).subscribe({
+  //     next: (res) => {
+  //       console.log('Login response:', res);
+  //       this.authService.saveToken(res.token);
+  //       this.router.navigate(['/users']);
+  //     }
+  //   });
+  // }
+  
+  
 }

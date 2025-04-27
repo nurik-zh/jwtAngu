@@ -26,16 +26,30 @@ describe('LoginComponent', () => {
     component = fixture.componentInstance;
   });
 
-  it('should login and navigate on success', () => {
-    const fakeToken = { token: 'test123' };
-    authServiceSpy.login.and.returnValue(of(fakeToken));
+  it('login and nvigate on success', () => {
+    const fakeToken = {token: 'testing123'}
+    authServiceSpy.login.and.returnValue(of(fakeToken))
 
-    component.email = 'test@example.com';
-    component.password = '123456';
+    component.email = 'asdasd@gmail.com'
+    component.password = 'asd123'
     component.onLogin();
 
-    expect(authServiceSpy.login).toHaveBeenCalledWith('test@example.com', '123456');
-    expect(authServiceSpy.saveToken).toHaveBeenCalledWith('test123');
-    expect(routerSpy.navigate).toHaveBeenCalledWith(['/users']);
-  });
+    expect(authServiceSpy.login).toHaveBeenCalledWith('asdasd@gmail.com', 'asd123')
+    expect(authServiceSpy.saveToken).toHaveBeenCalledWith('testing123')
+    expect(routerSpy.navigate).toHaveBeenCalledWith(['/users'])
+
+  })
+
+  // it('should login and navigate on success', () => {
+  //   const fakeToken = { token: 'test123' };
+  //   authServiceSpy.login.and.returnValue(of(fakeToken));
+
+  //   component.email = 'test@example.com';
+  //   component.password = '123456';
+  //   component.onLogin();
+
+  //   expect(authServiceSpy.login).toHaveBeenCalledWith('test@example.com', '123456');
+  //   expect(authServiceSpy.saveToken).toHaveBeenCalledWith('test123');
+  //   expect(routerSpy.navigate).toHaveBeenCalledWith(['/users']);
+  // });
 });
